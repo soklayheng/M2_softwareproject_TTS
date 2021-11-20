@@ -1,0 +1,6 @@
+name: tts-env
+channels:
+  - defaults
+dependencies:
+  - python=3.7
+  - flask
