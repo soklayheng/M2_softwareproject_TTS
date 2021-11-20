@@ -1,0 +1,23 @@
+version: "3.1"
+
+services:
+  tts-api:
+    image: tts-minicuda:latest
+    ports:
+    - 80:80
+    # entrypoint: ["ping", "tts-frontend"]
+    networks:
+      - tts-net
+
+  tts-frontend:
+    image: tts-minicuda:latest
+    ports:
+    - 81:81
+    entrypoint: ["cat", "../frontend/file"]
+    # npm run ...
+    networks:
+      - tts-net
+
+networks:
+  tts-net:
+    driver: bridge
