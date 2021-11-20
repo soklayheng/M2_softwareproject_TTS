@@ -1,6 +1,55 @@
 name: tts-env
 channels:
+  - pytorch
   - defaults
 dependencies:
-  - python=3.7
-  - flask
+  - _libgcc_mutex=0.1=main
+  - _openmp_mutex=4.5=1_gnu
+  - autopep8=1.5.7=pyhd3eb1b0_0
+  - blas=1.0=mkl
+  - ca-certificates=2021.10.26=h06a4308_2
+  - certifi=2021.10.8=py37h06a4308_0
+  - click=8.0.3=pyhd3eb1b0_0
+  - cudatoolkit=10.2.89=hfd86e86_1
+  - dataclasses=0.8=pyh6d0b6a4_7
+  - flask=2.0.2=pyhd3eb1b0_0
+  - intel-openmp=2021.4.0=h06a4308_3561
+  - itsdangerous=2.0.1=pyhd3eb1b0_0
+  - jinja2=3.0.2=pyhd3eb1b0_0
+  - ld_impl_linux-64=2.35.1=h7274673_9
+  - libffi=3.3=he6710b0_2
+  - libgcc-ng=9.3.0=h5101ec6_17
+  - libgomp=9.3.0=h5101ec6_17
+  - libstdcxx-ng=9.3.0=hd4cf53a_17
+  - libuv=1.40.0=h7b6447c_0
+  - markupsafe=2.0.1=py37h27cfd23_0
+  - mkl=2021.4.0=h06a4308_640
+  - ncurses=6.3=h7f8727e_2
+  - openssl=1.1.1l=h7f8727e_0
+  - pip=21.2.2=py37h06a4308_0
+  - pycodestyle=2.8.0=pyhd3eb1b0_0
+  - python=3.7.11=h12debd9_0
+  - pytorch=1.10.0=py3.7_cuda10.2_cudnn7.6.5_0
+  - pytorch-mutex=1.0=cuda
+  - readline=8.1=h27cfd23_0
+  - setuptools=58.0.4=py37h06a4308_0
+  - sqlite=3.36.0=hc218d9a_0
+  - tk=8.6.11=h1ccaba5_0
+  - toml=0.10.2=pyhd3eb1b0_0
+  - typing_extensions=3.10.0.2=pyh06a4308_0
+  - werkzeug=2.0.2=pyhd3eb1b0_0
+  - wheel=0.37.0=pyhd3eb1b0_1
+  - xz=5.2.5=h7b6447c_0
+  - zlib=1.2.11=h7b6447c_3
+  - pip:
+    - charset-normalizer==2.0.7
+    - huggingface-hub==0.1.2
+    - idna==3.3
+    - packaging==21.3
+    - requests==2.26.0
+    - six==1.16.0
+    - tqdm==4.62.3
+    - transformers==4.12.5
+    - urllib3==1.26.7
+prefix: /home/devmood/.conda/envs/tts-env
+
