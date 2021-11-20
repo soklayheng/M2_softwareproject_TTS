@@ -182,7 +182,7 @@ def valid(model, testloader):
 if __name__ == "__main__":
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-    data = pd.read_csv("lang_dataset.csv")
+    data = pd.read_csv("./data/lang_dataset.csv")
     train_size = 0.8
     train_dataset = data.sample(frac=train_size, random_state=20)
     test_dataset = data.drop(train_dataset.index).reset_index(drop=True)
