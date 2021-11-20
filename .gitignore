@@ -1,0 +1,4 @@
+Siwis*
+*.ipynb
+*/*.ipynb
+./vscode/*
