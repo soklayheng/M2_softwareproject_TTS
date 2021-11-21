@@ -30,7 +30,7 @@ class distil_bert_lstm(torch.nn.Module):
         out = self.classifier(input_data)
         return out
 
-sentenceInput = 'bonne jour'
+sentenceInput = input()
 tokenizer = BertTokenizer.from_pretrained('distilbert-base-uncased')
 inputData = tokenizer.encode_plus(
     sentenceInput,
@@ -45,7 +45,7 @@ ids = torch.tensor([inputData['input_ids']], dtype=torch.long).to('cuda')
 mask = torch.tensor([inputData['attention_mask']], dtype=torch.long).to('cuda')
 
 classifierModel = distil_bert_lstm(2).to('cuda')
-classifierModel.load_state_dict(torch.load(r'E:\编程文件\python\Uni_Lorraine\merlin\classifierModel'))
+classifierModel.load_state_dict(torch.load(r'classifierModel'))
 outputs = classifierModel(ids, mask)
 result = torch.max(outputs.data, dim=1).indices
 EN = torch.tensor([1]).to('cuda')
