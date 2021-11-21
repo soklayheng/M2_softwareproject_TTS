@@ -9,18 +9,19 @@ paths = [os.path.join(dir, x) for x in os.listdir(dir)]
 
 def process(path):
     stream = os.popen(f"perl ./phonetize.pl {path} texts hts run")
-    lines = map(lambda l: l.strip(), stream
-                .read()
-                .replace("mode=run\n", "¤")
-                .replace("\nDELETE", "¤")
-                .split("¤")[1:-1][0].split())
+    tmp = stream.read().replace("mode=run\n", "¤").replace("\nDELETE", "¤").split("¤")[1:-1]
+    lines, phonemes = [], []
 
-    phonemes = []
-    for x in lines:
-        splt = x.replace("-", "¤").replace("+", "¤").split("¤")
-        if len(splt) > 1:
-            phonemes.append(splt[1])
+    if tmp:
+        lines = tmp[0].split()
 
+        phonemes = []
+        for x in lines:
+            splt = x.replace("-", "¤").replace("+", "¤").split("¤")
+            if len(splt) > 1:
+                phonemes.append(splt[1])
+
+    # print(phonemes)
     return phonemes
 
 
