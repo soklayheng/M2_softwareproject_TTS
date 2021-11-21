@@ -116,7 +116,7 @@ def train(epoch, model):
         nb_tr_steps += 1
         nb_tr_examples += targets.size(0)
 
-        if i % 50 == 0:
+        if i % 5 == 0:
             loss_step = tr_loss / nb_tr_steps
             acc_step = (n_correct * 100) / nb_tr_examples
             print(
