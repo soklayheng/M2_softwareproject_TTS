@@ -1,6 +1,30 @@
 import React, {Component } from "react";
+// function fetch() {
+//   return new Promise(resolve => setTimeout(() => resolve(42), 1000));
+// }
+export async function fetchVoice()
+{ 
+  console.log("calling api");
+  // return fetch("http://localhost:5000/synthesize");
+  //return fetch("https://jsonplaceholder.typicode.com/todos/1");
+
+}
 export default class Home extends Component {
- 
+
+listen=()=>{
+  fetch("https://jsonplaceholder.typicode.com/todos/1", {
+    method: "GET",
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+  }
+)
+.then((res) => console.log(res))
+.catch(error=>console.log(error));
+};
+
+
   render(){
     return (
       <div>
@@ -32,7 +56,7 @@ export default class Home extends Component {
               
           {/* <div class="card-footer text-muted">500 characters</div> */}
           <div class="container">
-  <button type="button" class="btn btn-default" style={{background:"#40E0D0"}}>Listen!</button>
+  <button type="button" onClick={this.listen} class="btn btn-default" style={{background:"#40E0D0"}}>Listen!</button>
   <button type="button" class="btn btn-default" style={{background:"#F08080"}}>Reset</button>
 </div>
           </div>
