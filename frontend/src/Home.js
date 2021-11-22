@@ -5,14 +5,14 @@ import React, {Component } from "react";
 export async function fetchVoice()
 { 
   console.log("calling api");
-  // return fetch("http://localhost:5000/synthesize");
+   return fetch("http://localhost:5000/synthesize");
   //return fetch("https://jsonplaceholder.typicode.com/todos/1");
 
 }
 export default class Home extends Component {
 
 listen=()=>{
-  fetch("https://jsonplaceholder.typicode.com/todos/1", {
+  fetch("http://localhost:5000/synthesize", {
     method: "GET",
     headers: {
       'Accept': 'application/json',
