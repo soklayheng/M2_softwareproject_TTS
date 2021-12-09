@@ -17,9 +17,9 @@ def hello_world():
 @cross_origin(origin="*", headers=["Content-Type", "Authorization"])
 def synthesize():
     if request.method == "GET":
-        sentence = request.args.get("sentence")
-        # content = request.json
-        # sentence = content["sentence"]
+        # sentence = request.args.get("sentence")
+        content = request.json
+        sentence = content["sentence"]
 
         print(f"Processing: {sentence} in progress...")
         lang = classify(sentence)
