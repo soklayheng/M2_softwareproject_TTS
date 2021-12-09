@@ -13,11 +13,10 @@ def hello_world():
     return "<p>Server reachable!</p>"
 
 
-@app.route("/synthesize", methods=["GET"])
+@app.route("/synthesize", methods=["POST"])
 @cross_origin(origin="*", headers=["Content-Type", "Authorization"])
 def synthesize():
-    if request.method == "GET":
-        # sentence = request.args.get("sentence")
+    if request.method == "POST":
         content = request.json
         sentence = content["sentence"]
 
@@ -27,7 +26,9 @@ def synthesize():
         print(f"Let's synthesize")
 
         return jsonify({"speech": "future *.raw file ?"})
+    else:
+        return jsonify({"speech": "nie dla psa kiełbasa"})
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", debug=True)
+    app.run(host="0.0.0.0", debug=False)
