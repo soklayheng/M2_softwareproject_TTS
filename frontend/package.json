@@ -2,6 +2,7 @@
   "name": "tts-project",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://192.168.0.28:5000",
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
