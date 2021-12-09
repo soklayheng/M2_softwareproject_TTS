@@ -1,28 +1,56 @@
 import React, {Component } from "react";
-// function fetch() {
-//   return new Promise(resolve => setTimeout(() => resolve(42), 1000));
-// }
-export async function fetchVoice()
-{ 
-  console.log("calling api");
-   return fetch("http://localhost:5000/synthesize");
-  //return fetch("https://jsonplaceholder.typicode.com/todos/1");
+import { sentence } from "./data";
 
-}
+
+// export async function fetchVoice()
+// { 
+//   console.log("calling api");
+//     return fetch("http://localhost:5000/synthesize");
+//   // return fetch("https://jsonplaceholder.typicode.com/todos/1");
+//   // return fetchVoice(sentence)
+
+// }
 export default class Home extends Component {
 
-listen=()=>{
-  fetch("http://localhost:5000/synthesize", {
-    method: "GET",
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    },
+  constructor(props) {
+    super(props)
+    this.state = {
+      TextInputValueHolder: ''
+    }
+ 
   }
-)
-.then((res) => console.log(res))
-.catch(error=>console.log(error));
+  // listen = () =>{
+  //   const { TextInputValueHolder }  = this.state ;
+  //     Alert.alert(TextInputValueHolder)
+  // }
+    
+
+
+     
+listen=()=>{
+var myHeaders = new Headers();
+myHeaders.append("Accept", "application/json");
+myHeaders.append("Content-Type", "application/json");
+
+var raw = JSON.stringify({
+  "sentence": document.getElementById('speechtextid').value 
+});
+
+var requestOptions = {
+  method: 'POST',
+  // mode: 'no-cors',
+  headers: myHeaders,
+  body: raw,
+  // redirect: 'follow'
 };
+
+fetch("http://127.0.0.1:5000/synthesize", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+};
+
+
 
 
   render(){
@@ -52,7 +80,8 @@ listen=()=>{
                               </ul>
                            </div> */}
  
-              <textarea id="story" class="story" name="story" placeholder="Type Here (Maximum 500 Characters)"rows="9" cols="78" maxLength="500"></textarea>
+              <textarea id={'speechtextid'} class="story" name="story" placeholder="Type Here (Maximum 500 Characters)" rows="9" cols="78" maxLength="500">
+              </textarea>
               
           {/* <div class="card-footer text-muted">500 characters</div> */}
           <div class="container">
