@@ -1,20 +1,18 @@
-name: tts-env
+name: testing
 channels:
   - pytorch
-  - anaconda
   - defaults
 dependencies:
   - _libgcc_mutex=0.1=main
   - _openmp_mutex=4.5=1_gnu
   - autopep8=1.5.7=pyhd3eb1b0_0
   - blas=1.0=mkl
-  - ca-certificates=2020.10.14=0
+  - ca-certificates=2021.10.26=h06a4308_2
   - certifi=2021.10.8=py37h06a4308_0
   - click=8.0.3=pyhd3eb1b0_0
   - cudatoolkit=10.2.89=hfd86e86_1
   - dataclasses=0.8=pyh6d0b6a4_7
   - flask=2.0.2=pyhd3eb1b0_0
-  - flask-cors=3.0.9=py_0
   - intel-openmp=2021.4.0=h06a4308_3561
   - itsdangerous=2.0.1=pyhd3eb1b0_0
   - jinja2=3.0.2=pyhd3eb1b0_0
@@ -53,5 +51,4 @@ dependencies:
     - tqdm==4.62.3
     - transformers==4.12.5
     - urllib3==1.26.7
-prefix: /home/devmood/.conda/envs/tts-env
 

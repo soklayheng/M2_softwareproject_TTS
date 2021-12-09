@@ -1,0 +1,3 @@
+[submodule "Speech-Backbones"]
+	path = Speech-Backbones
+	url = https://github.com/huawei-noah/Speech-Backbones.git
