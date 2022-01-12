@@ -6,7 +6,6 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # MIT License for more details.
 
-import sys
 import os
 import json
 import numpy as np
@@ -14,7 +13,6 @@ from scipy.io.wavfile import write
 
 import torch
 
-# sys.path.append('./src/Grad-TTS/')
 import params
 from model import GradTTS
 from text import text_to_sequence, cmudict
@@ -25,9 +23,9 @@ from hifigan.models import Generator as HiFiGAN
 from hifigan.env import AttrDict
 
 
-HIFIGAN_CONFIG =       os.path.abspath('./src/Grad-TTS/checkpts/hifigan-config.json')
-HIFIGAN_CHECKPT =      os.path.abspath('./src/Grad-TTS/checkpts/hifigan.pt')
-GRAD_CHECKPT =         os.path.abspath('./src/Grad-TTS/checkpts/grad-tts-old.pt')
+HIFIGAN_CONFIG = os.path.abspath('./src/Grad-TTS/checkpts/hifigan-config.json')
+HIFIGAN_CHECKPT = os.path.abspath('./src/Grad-TTS/checkpts/hifigan.pt')
+GRAD_CHECKPT = os.path.abspath('./src/Grad-TTS/checkpts/grad-tts-old.pt')
 TIMESTEPS = 10
 SPEAKER = None
 
@@ -57,49 +55,3 @@ def say(sent: str):
         write(fout_path, 22050, audio)
 
     return fout_path
-
-##################
-
-# INPUT_SYNTHESIS_PATH = os.path.abspath("./src/Grad-TTS/resources/filelists/synthesis.txt")
-# texts = [line.strip() for line in open(
-#     INPUT_SYNTHESIS_PATH, "r", encoding="utf-8").readlines()]
-# cmu = cmudict.CMUDict('./src/Grad-TTS/resources/cmu_dictionary')
-# 
-# with torch.no_grad():
-#     for i, text in enumerate(texts):
-#         x = torch.LongTensor(intersperse(text_to_sequence(text, dictionary=cmu), len(symbols)))[None]
-#         x_lengths = torch.LongTensor([x.shape[-1]])
-#         _, y_dec, _ = generator.forward(x, x_lengths, n_timesteps=TIMESTEPS, temperature=1.5, stoc=False, spk=SPEAKER, length_scale=0.91)
-# 
-#         audio = (vocoder.forward(y_dec).cpu().squeeze().clamp(-1, 1).numpy() * 32768).astype(np.int16)
-# 
-#         fout_path = os.path.abspath(f'./src/Grad-TTS/out/sample_{i}.wav')
-#         write(fout_path, 22050, audio)
-#         playsound(fout_path)
-
-# if __name__ == '__main__':
-#     generator = GradTTS(len(symbols)+1, params.n_spks, params.spk_emb_dim, params.n_enc_channels, params.filter_channels, params.filter_channels_dp, params.n_heads,
-#                         params.n_enc_layers, params.enc_kernel, params.enc_dropout, params.window_size, params.n_feats, params.dec_dim, params.beta_min, params.beta_max, params.pe_scale)
-#     generator.load_state_dict(torch.load(GRAD_CHECKPT, map_location=lambda loc, storage: loc))
-#     _ = generator.eval()
-# 
-#     vocoder = HiFiGAN(AttrDict(json.load(open(HIFIGAN_CONFIG))))
-#     vocoder.load_state_dict(torch.load(HIFIGAN_CHECKPT, map_location=lambda loc, storage: loc)['generator'])
-#     _ = vocoder.eval()
-#     vocoder.remove_weight_norm()
-# 
-#     texts = [line.strip() for line in open(
-#         INPUT_SYNTHESIS_PATH, "r", encoding="utf-8").readlines()]
-#     cmu = cmudict.CMUDict('./src/Grad-TTS/resources/cmu_dictionary')
-# 
-#     with torch.no_grad():
-#         for i, text in enumerate(texts):
-#             x = torch.LongTensor(intersperse(text_to_sequence(text, dictionary=cmu), len(symbols)))[None]
-#             x_lengths = torch.LongTensor([x.shape[-1]])
-#             _, y_dec, _ = generator.forward(x, x_lengths, n_timesteps=TIMESTEPS, temperature=1.5, stoc=False, spk=SPEAKER, length_scale=0.91)
-# 
-#             audio = (vocoder.forward(y_dec).cpu().squeeze().clamp(-1, 1).numpy() * 32768).astype(np.int16)
-# 
-#             fout_path = os.path.abspath(f'./src/Grad-TTS/out/sample_{i}.wav')
-#             write(fout_path, 22050, audio)
-#             playsound(fout_path)
