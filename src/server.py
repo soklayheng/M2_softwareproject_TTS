@@ -1,7 +1,15 @@
+#!/usr/bin/env python
+
+from playsound import playsound
+
 from flask import Flask, request, jsonify
 from flask_cors import CORS, cross_origin
 
 from classifier import classify
+
+import sys
+sys.path.append('./src/Grad-TTS/')
+from inference import say
 
 app = Flask(__name__)
 CORS(app)
@@ -24,6 +32,11 @@ def synthesize():
         lang = classify(sentence)
         print(f"Language: {lang} detected", end="\n\n")
         print(f"Let's synthesize")
+
+        if lang == "EN":
+            playsound(say(sentence))
+        else:
+            playsound(say("Sorry, you have to wait for the french model; only english one available"))
 
         return jsonify({"speech": "future *.raw file ?"})
     else:
