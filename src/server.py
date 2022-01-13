@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 
-from playsound import playsound
-
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_file
 from flask_cors import CORS, cross_origin
 
 from classifier import classify
@@ -34,14 +32,17 @@ def synthesize():
         print(f"Language: {lang} detected", end="\n\n")
         print(f"Let's synthesize")
 
-        # if lang == "EN":
-        #     playsound(say(sentence))
-        # else:
-        #     playsound(say("Sorry, you have to wait for the french model; only english one available"))
-
-        return jsonify({"speech": "future *.raw file ?"})
+        if lang == "EN":
+            out_path = say(sentence)
+            # playsound(say(sentence))
+        else:
+            default_response = "Sorry, you have to wait for the french model; only english one available"
+            out_path = say(default_response)
+            # playsound(say(default_response))
+        
+        return send_file(out_path, mimetype="audio/wav", as_attachment=True, attachment_filename="sample.wav")
     else:
-        return jsonify({"speech": "nie dla psa kiełbasa"})
+        return jsonify({"speech": "Can't touch this"})
 
 
 if __name__ == "__main__":
