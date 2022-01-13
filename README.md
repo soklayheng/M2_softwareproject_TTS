@@ -17,3 +17,4 @@ Now You can open up the app in the browser and play with the tool.
 ## TODO:
 - dockerize to automatically build environment with required models + automatically run services: client, server;
 - speech synthesis (eng pretrained), fr to be trained and prepared
+- evaluation 
