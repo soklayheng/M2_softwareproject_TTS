@@ -1,4 +1,4 @@
-Evaluation will be based on both objective and subjective evaluation.
+Evaluation will be based on both objective and subjective approaches.
 
 Regarding objective evaluation, we will use ASR provided by Google to recognize our generated voice. WER is then used for comparing between ground_truth (generated voice) and hypo(transcription by ASR).
 
