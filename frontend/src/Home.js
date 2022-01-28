@@ -12,11 +12,14 @@ import { sentence } from "./data";
 // }
 export default class Home extends Component {
 
+ 
   constructor(props) {
     super(props)
     this.state = {
-      TextInputValueHolder: ''
+      TextInputValueHolder: '',
+      apiresponse:''
     }
+    this.listen = this.listen.bind(this)
  
   }
   // listen = () =>{
@@ -46,9 +49,15 @@ var requestOptions = {
 
 fetch("http://127.0.0.1:5000/synthesize", requestOptions)
   .then(response => response.text())
-  .then(result => console.log(result))
+  .then(result =>{
+    console.log(result)
+    this.setState(state=>{state.apiresponse=result})
+
+  } )
   .catch(error => console.log('error', error));
 };
+
+
 
 
 
@@ -82,11 +91,14 @@ fetch("http://127.0.0.1:5000/synthesize", requestOptions)
  
               <textarea id={'speechtextid'} class="story" name="story" placeholder="Type Here (Maximum 500 Characters)" rows="9" cols="78" maxLength="500">
               </textarea>
+              <div><h1>
+                {this.state.apiresponse.speech}
+              </h1></div>
               
           {/* <div class="card-footer text-muted">500 characters</div> */}
           <div class="container">
   <button type="button" onClick={this.listen} class="btn btn-default" style={{background:"#40E0D0"}}>Listen!</button>
-  <button type="button" class="btn btn-default" style={{background:"#F08080"}}>Reset</button>
+  <button type="button"  class="btn btn-default" style={{background:"#F08080"}}>Reset</button>
 </div>
           </div>
       </div>
@@ -99,7 +111,7 @@ fetch("http://127.0.0.1:5000/synthesize", requestOptions)
 <div class="container-fluid " style={{background:"#DCDCDC"}}>
     <h3>About Us</h3>
     <img src="logo.png" class="rounded-circle" alt="Logo" width="80" height="100"/>
-    <h5>Text To Speech delivers human-like, personalized, and engaging user experiencem You now have the ability to translate text into a voice in any language through our Free Online Text to Speech tool. Below you will find some of the languages ​​currently supported on our TTS converter app</h5>
+    <h5>Text To Speech delivers human-like, personalized, and engaging user experiencem You now have the ability to translate text into a voice in any language through our Free Online Text to Speech tool. Below you will find some of the languages ​​currently supported on our TTS converter app: English and French</h5>
   </div>
 </div>
 </div>
