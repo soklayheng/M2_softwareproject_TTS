@@ -23,9 +23,12 @@ from hifigan.models import Generator as HiFiGAN
 from hifigan.env import AttrDict
 
 
-HIFIGAN_CONFIG = os.path.abspath('./src/Grad-TTS/checkpts/hifigan-config.json')
-HIFIGAN_CHECKPT = os.path.abspath('./src/Grad-TTS/checkpts/hifigan.pt')
-GRAD_CHECKPT = os.path.abspath('./src/Grad-TTS/checkpts/grad-tts-old.pt')
+HIFIGAN_CONFIG = os.path.abspath('./Grad-TTS/checkpts/hifigan-config.json')
+HIFIGAN_CHECKPT = os.path.abspath('./Grad-TTS/checkpts/hifigan.pt')
+GRAD_CHECKPT = os.path.abspath('./Grad-TTS/checkpts/grad-tts-old.pt')
+# HIFIGAN_CONFIG = os.path.abspath('./src/Grad-TTS/checkpts/hifigan-config.json')
+# HIFIGAN_CHECKPT = os.path.abspath('./src/Grad-TTS/checkpts/hifigan.pt')
+# GRAD_CHECKPT = os.path.abspath('./src/Grad-TTS/checkpts/grad-tts-old.pt')
 TIMESTEPS = 10
 SPEAKER = None
 
@@ -39,11 +42,11 @@ vocoder.load_state_dict(torch.load(HIFIGAN_CHECKPT, map_location=lambda loc, sto
 _ = vocoder.eval()
 vocoder.remove_weight_norm()
 
-cmu = cmudict.CMUDict('./src/Grad-TTS/resources/cmu_dictionary')
+cmu = cmudict.CMUDict('./Grad-TTS/resources/cmu_dictionary')
 
 
 def say(sent: str):
-    fout_path = os.path.abspath(f'./src/Grad-TTS/out/sample.wav')
+    fout_path = os.path.abspath(f'./Grad-TTS/out/sample.wav')
 
     with torch.no_grad():
         x = torch.LongTensor(intersperse(text_to_sequence(sent, dictionary=cmu), len(symbols)))[None]
