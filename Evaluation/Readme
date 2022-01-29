@@ -1,0 +1,11 @@
+Evaluation will be based on both objective and subjective approaches.
+
+Regarding objective evaluation, we will use ASR provided by Google to recognize our generated voice. WER is then used for comparing between ground_truth (generated voice) and hypo(transcription by ASR).
+
+In addition to objective evaluation, subjective evaluation will be implemented to evaluate our speech synthesizer system. We will target 10 to 15 English native speakers for evaluating English TTS model, and 10 to 15 French speakers to evaluate French model. Regarding the measurement for this evaluation process, we would like to emphasize on 3 criteria: Intelligibility, Naturalness, and Overall View of the system. 
+
+We have also deployed the website to be available on public on this address (althogh the server is not working properly): 
+https://multts.herokuapp.com/ 
+
+The survey link for evaluating the English system can be found here:
+https://www.questionpro.com/t/AUuQ1Zq4ov
