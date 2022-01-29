@@ -26,7 +26,6 @@ RUN conda activate tts-env \
 	&& python setup.py build_ext --inplace \
 	&& cd ../../..
 
-EXPOSE 5000
-
 CMD conda activate tts-env \
+	# && uwsgi ./app.ini
 	&& ./server.py

@@ -2,22 +2,30 @@ version: "3.1"
 
 services:
   tts-api:
-    image: tts-minicuda:latest
+    build: .
+    container_name: tts-api
+    expose:
+      - 8080 # for uwsgi
+      # - 5000 # for ui
     ports:
-    - 80:80
-    # entrypoint: ["ping", "tts-frontend"]
-    networks:
-      - tts-net
-
+      - 5000:5000
+    # networks:
+    #   - tts-net
+  # tts-nginx:
+  #   build: ./nginx
+  #   container_name: tts-nginx
+  #   ports:
+  #     - 80:80
   tts-frontend:
-    image: tts-minicuda:latest
+    build: ./frontend
+    container_name: tts-ui
     ports:
-    - 81:81
-    entrypoint: ["cat", "../frontend/file"]
-    # npm run ...
-    networks:
-      - tts-net
+      - 3000:3000
+    # expose:
+    #   - 8080
+    # networks:
+    #   - tts-net
 
-networks:
-  tts-net:
-    driver: bridge
+# networks:
+#   tts-net:
+#     driver: bridge
