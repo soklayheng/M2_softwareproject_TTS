@@ -1,5 +1,5 @@
 Siwis*
 *.ipynb
 */*.ipynb
-.vscode/*
+**/.vscode/*
 **/__pycache__/
