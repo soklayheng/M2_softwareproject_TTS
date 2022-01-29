@@ -39,7 +39,6 @@ def synthesize():
             default_response = "Sorry, you have to wait for the french model; only english one available"
             out_path = say(default_response)
             # playsound(say(default_response))
-        
         return send_file(out_path, mimetype="audio/wav", as_attachment=True, attachment_filename="sample.wav")
     else:
         return jsonify({"speech": "Can't touch this"})

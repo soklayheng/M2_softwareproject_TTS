@@ -46,7 +46,7 @@ cmu = cmudict.CMUDict('./Grad-TTS/resources/cmu_dictionary')
 
 
 def say(sent: str):
-    fout_path = os.path.abspath(f'./Grad-TTS/out/sample.wav')
+    fout_path = os.path.abspath('./Grad-TTS/out/sample.wav')
 
     with torch.no_grad():
         x = torch.LongTensor(intersperse(text_to_sequence(sent, dictionary=cmu), len(symbols)))[None]
