@@ -47,14 +47,14 @@ var requestOptions = {
   // redirect: 'follow'
 };
 
-fetch("http://127.0.0.1:5000/synthesize", requestOptions)
+fetch("/synthesize", requestOptions)
   .then(response => response.text())
   .then(result =>{
     console.log(result)
     this.setState(state=>{state.apiresponse=result})
 
   } )
-  .catch(error => console.log('error', error));
+  .catch(_ => console.log('error'));
 };
 
 
