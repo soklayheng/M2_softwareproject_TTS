@@ -7,11 +7,11 @@
 # MIT License for more details.
 
 import numpy as np
-from tqdm import tqdm
+# from tqdm import tqdm
 
 import torch
 from torch.utils.data import DataLoader
-from torch.utils.tensorboard import SummaryWriter
+# from torch.utils.tensorboard import SummaryWriter
 
 import params
 from model import GradTTS
@@ -63,7 +63,7 @@ if __name__ == "__main__":
     np.random.seed(random_seed)
 
     print('Initializing logger...')
-    logger = SummaryWriter(log_dir=log_dir)
+    # logger = SummaryWriter(log_dir=log_dir)
 
     print('Initializing data loaders...')
     train_dataset = TextMelSpeakerDataset(train_filelist_path, cmudict_path, add_blank,
@@ -130,44 +130,44 @@ if __name__ == "__main__":
         dur_losses = []
         prior_losses = []
         diff_losses = []
-        with tqdm(loader, total=len(train_dataset)//batch_size) as progress_bar:
-            for batch in progress_bar:
-                model.zero_grad()
-                # x, x_lengths = batch['x'].cuda(), batch['x_lengths'].cuda()
-                x, x_lengths = batch['x'], batch['x_lengths']
-                # y, y_lengths = batch['y'].cuda(), batch['y_lengths'].cuda()
-                y, y_lengths = batch['y'], batch['y_lengths']
-                spk = batch['spk']  # .cuda()
-                dur_loss, prior_loss, diff_loss = model.compute_loss(x, x_lengths,
-                                                                     y, y_lengths,
-                                                                     spk=spk, out_size=out_size)
-                loss = sum([dur_loss, prior_loss, diff_loss])
-                loss.backward()
+        # with tqdm(loader, total=len(train_dataset)//batch_size) as progress_bar:
+        for batch in loader:
+            model.zero_grad()
+            # x, x_lengths = batch['x'].cuda(), batch['x_lengths'].cuda()
+            x, x_lengths = batch['x'], batch['x_lengths']
+            # y, y_lengths = batch['y'].cuda(), batch['y_lengths'].cuda()
+            y, y_lengths = batch['y'], batch['y_lengths']
+            spk = batch['spk']  # .cuda()
+            dur_loss, prior_loss, diff_loss = model.compute_loss(x, x_lengths,
+                                                                    y, y_lengths,
+                                                                    spk=spk, out_size=out_size)
+            loss = sum([dur_loss, prior_loss, diff_loss])
+            loss.backward()
 
-                enc_grad_norm = torch.nn.utils.clip_grad_norm_(model.encoder.parameters(), 
-                                                            max_norm=1)
-                dec_grad_norm = torch.nn.utils.clip_grad_norm_(model.decoder.parameters(), 
-                                                            max_norm=1)
-                optimizer.step()
+            enc_grad_norm = torch.nn.utils.clip_grad_norm_(model.encoder.parameters(), 
+                                                        max_norm=1)
+            dec_grad_norm = torch.nn.utils.clip_grad_norm_(model.decoder.parameters(), 
+                                                        max_norm=1)
+            optimizer.step()
 
-                logger.add_scalar('training/duration_loss', dur_loss,
-                                global_step=iteration)
-                logger.add_scalar('training/prior_loss', prior_loss,
-                                global_step=iteration)
-                logger.add_scalar('training/diffusion_loss', diff_loss,
-                                global_step=iteration)
-                logger.add_scalar('training/encoder_grad_norm', enc_grad_norm,
-                                global_step=iteration)
-                logger.add_scalar('training/decoder_grad_norm', dec_grad_norm,
-                                global_step=iteration)
-                
-                msg = f'Epoch: {epoch}, iteration: {iteration} | dur_loss: {dur_loss.item()}, prior_loss: {prior_loss.item()}, diff_loss: {diff_loss.item()}'
-                progress_bar.set_description(msg)
-                
-                dur_losses.append(dur_loss.item())
-                prior_losses.append(prior_loss.item())
-                diff_losses.append(diff_loss.item())
-                iteration += 1
+            logger.add_scalar('training/duration_loss', dur_loss,
+                            global_step=iteration)
+            logger.add_scalar('training/prior_loss', prior_loss,
+                            global_step=iteration)
+            logger.add_scalar('training/diffusion_loss', diff_loss,
+                            global_step=iteration)
+            logger.add_scalar('training/encoder_grad_norm', enc_grad_norm,
+                            global_step=iteration)
+            logger.add_scalar('training/decoder_grad_norm', dec_grad_norm,
+                            global_step=iteration)
+            
+            msg = f'Epoch: {epoch}, iteration: {iteration} | dur_loss: {dur_loss.item()}, prior_loss: {prior_loss.item()}, diff_loss: {diff_loss.item()}'
+            progress_bar.set_description(msg)
+            
+            dur_losses.append(dur_loss.item())
+            prior_losses.append(prior_loss.item())
+            diff_losses.append(diff_loss.item())
+            iteration += 1
 
         msg = 'Epoch %d: duration loss = %.3f ' % (epoch, np.mean(dur_losses))
         msg += '| prior loss = %.3f ' % np.mean(prior_losses)

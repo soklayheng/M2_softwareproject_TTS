@@ -6,7 +6,6 @@ from flask_cors import CORS, cross_origin
 from classifier import classify
 
 import sys
-# sys.path.append('./src/Grad-TTS/')
 sys.path.append('./Grad-TTS/')
 from inference import say
 

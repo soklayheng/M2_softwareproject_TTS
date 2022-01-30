@@ -1,8 +1,8 @@
-from tqdm import tqdm
+# from tqdm import tqdm
 
 import pandas as pd
-from matplotlib import pyplot as plt
-import seaborn as sns
+# from matplotlib import pyplot as plt
+# import seaborn as sns
 from sklearn.metrics import classification_report, confusion_matrix
 
 import torch
@@ -42,29 +42,29 @@ class SentenceData():
             "targets": torch.tensor(self.data["int_label"][index], dtype=torch.long)}
 
     # TODO: not used visualization; delete, unless useful for report
-    def visualization(self):
-        sentence_length_list = [len(sent.split(" "))
-                                for sent in self.data["SIT"]]
+    # def visualization(self):
+    #     sentence_length_list = [len(sent.split(" "))
+    #                             for sent in self.data["SIT"]]
 
-        sns.set_style("darkgrid")
-        sns.distplot(sentence_length_list)
-        plt.xlim(1, 60)
-        plt.show()
+    #     sns.set_style("darkgrid")
+    #     sns.distplot(sentence_length_list)
+    #     plt.xlim(1, 60)
+    #     plt.show()
 
-        labels = set(self.data["Field1"].tolist())
-        label_amount_dict = dict(zip(labels, [0]*len(labels)))
-        for label in self.data["Field1"]:
-            label_amount_dict[label] += 1
+    #     labels = set(self.data["Field1"].tolist())
+    #     label_amount_dict = dict(zip(labels, [0]*len(labels)))
+    #     for label in self.data["Field1"]:
+    #         label_amount_dict[label] += 1
 
-        label_amount_df = pd.DataFrame({
-            "emotion": label_amount_dict.keys(),
-            "amount": label_amount_dict.values()})
-        sns.barplot(
-            x=label_amount_df["emotion"],
-            y=label_amount_df["amount"],
-            data=label_amount_df,
-            ci=67)
-        plt.show()
+    #     label_amount_df = pd.DataFrame({
+    #         "emotion": label_amount_dict.keys(),
+    #         "amount": label_amount_dict.values()})
+    #     sns.barplot(
+    #         x=label_amount_df["emotion"],
+    #         y=label_amount_df["amount"],
+    #         data=label_amount_df,
+    #         ci=67)
+    #     plt.show()
 
     def __len__(self):
         return self.len
@@ -81,7 +81,8 @@ def train(epoch, model):
 
     model.train()
 
-    for i, data in tqdm(enumerate(trainloader)):
+    # for i, data in tqdm(enumerate(trainloader)):
+    for i, data in enumerate(trainloader):
         ids = data["ids"].to(device, dtype=torch.long)
         mask = data["mask"].to(device, dtype=torch.long)
         targets = data["targets"].to(device, dtype=torch.long)
@@ -192,16 +193,16 @@ if __name__ == "__main__":
         targets_list[index] = targets_list[index].to("cpu").int()
         label_pre_list[index] = label_pre_list[index].to("cpu").int()
 
-    fig = plt.figure()
-    ax = fig.add_subplot(111)
-    conf_matrix = confusion_matrix(targets_list, label_pre_list)
-    sns.heatmap(
-        conf_matrix, annot=True, xticklabels=["Eng", "Fre"],
-        yticklabels=["Eng", "Fre"])
+    # fig = plt.figure()
+    # ax = fig.add_subplot(111)
+    # conf_matrix = confusion_matrix(targets_list, label_pre_list)
+    # sns.heatmap(
+    #     conf_matrix, annot=True, xticklabels=["Eng", "Fre"],
+    #     yticklabels=["Eng", "Fre"])
 
-    ax.set_xlabel("predict")
-    ax.set_ylabel("true")
-    plt.show()
+    # ax.set_xlabel("predict")
+    # ax.set_ylabel("true")
+    # plt.show()
     print(classification_report(
         targets_list, label_pre_list,
         target_names=["Eng", "Fre"]))

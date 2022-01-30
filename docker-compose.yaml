@@ -1,31 +1,21 @@
-version: "3.1"
+version: "3.9"
 
 services:
   tts-api:
     build: .
     container_name: tts-api
     expose:
-      - 8080 # for uwsgi
-      # - 5000 # for ui
+      - 8000
+  tts-proxy:
+    container_name: tts-proxy
+    build: nginx
+    restart: always
     ports:
-      - 5000:5000
-    # networks:
-    #   - tts-net
-  # tts-nginx:
-  #   build: ./nginx
-  #   container_name: tts-nginx
-  #   ports:
-  #     - 80:80
+      - 80:80
+    depends_on:
+      - tts-api
   tts-frontend:
-    build: ./frontend
+    build: frontend
     container_name: tts-ui
     ports:
       - 3000:3000
-    # expose:
-    #   - 8080
-    # networks:
-    #   - tts-net
-
-# networks:
-#   tts-net:
-#     driver: bridge
