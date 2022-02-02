@@ -29,18 +29,15 @@ def synthesize():
         print(f"Processing: {sentence} in progress...")
         lang = classify(sentence)
         print(f"Language: {lang} detected", end="\n\n")
-        print(f"Let's synthesize")
+        print("Let's synthesize")
 
-        if lang == "EN":
-            out_path = say(sentence)
-            # playsound(say(sentence))
-        else:
-            default_response = "Sorry, you have to wait for the french model; only english one available"
-            out_path = say(default_response)
-            # playsound(say(default_response))
+        out_path = say(sentence, lang)
+
         return send_file(out_path, mimetype="audio/wav", as_attachment=True, attachment_filename="sample.wav")
     else:
-        return jsonify({"speech": "Can't touch this"})
+        out_path = say("Can't touch this", lang)
+        return send_file(out_path, mimetype="audio/wav", as_attachment=True, attachment_filename="sample.wav")
+        # return jsonify({"speech": "Can't touch this"})
 
 
 if __name__ == "__main__":

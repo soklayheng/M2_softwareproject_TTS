@@ -2,4 +2,5 @@ Siwis*
 *.ipynb
 */*.ipynb
 **/.vscode/*
+**/.idea/*
 **/__pycache__/
