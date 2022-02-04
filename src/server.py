@@ -33,10 +33,10 @@ def synthesize():
 
         out_path = say(sentence, lang)
 
-        return send_file(out_path, mimetype="audio/wav", as_attachment=True, attachment_filename="sample.wav")
+        return send_file(out_path, mimetype="audio/mpeg", as_attachment=True, attachment_filename="sample.mp3")
     else:
         out_path = say("Can't touch this", lang)
-        return send_file(out_path, mimetype="audio/wav", as_attachment=True, attachment_filename="sample.wav")
+        return send_file(out_path, mimetype="audio/mpeg", as_attachment=True, attachment_filename="sample.mp3")
         # return jsonify({"speech": "Can't touch this"})
 
 

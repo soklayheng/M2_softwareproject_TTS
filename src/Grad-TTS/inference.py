@@ -22,6 +22,8 @@ from utils import intersperse
 from hifigan.models import Generator as HiFiGAN
 from hifigan.env import AttrDict
 
+from pydub import AudioSegment
+
 
 HIFIGAN_CONFIG = os.path.abspath('./Grad-TTS/checkpts/hifigan-config.json')
 HIFIGAN_CHECKPT = os.path.abspath('./Grad-TTS/checkpts/hifigan.pt')
@@ -58,7 +60,8 @@ cmu_fr = cmudict.CMUDict('./Grad-TTS/resources/cmu_dictionary_fr')
 
 
 def say(sent: str, lang: str) -> str:
-    fout_path = os.path.abspath('./Grad-TTS/out/sample.wav')
+    fout_path_wav = os.path.abspath('./Grad-TTS/out/sample.wav')
+    fout_path_mp3 = os.path.abspath('./Grad-TTS/out/sample.mp3')
 
     with torch.no_grad():
         if lang == "EN":
@@ -73,6 +76,8 @@ def say(sent: str, lang: str) -> str:
         else:
             audio = (vocoder_fr.forward(y_dec).cpu().squeeze().clamp(-1, 1).numpy() * 32768).astype(np.int16)
 
-        write(fout_path, 22050, audio)
+        write(fout_path_wav, 22050, audio)
 
-    return fout_path
+        AudioSegment.from_wav(fout_path_wav).export(fout_path_mp3, format="mp3")
+
+    return fout_path_mp3
