@@ -103,6 +103,7 @@ dependencies:
     - pillow==8.4.0
     - pooch==1.6.0
     - pycodestyle==2.8.0
+    - pydub==0.25.1
     - python-dateutil==2.8.2
     - pyyaml==6.0
     - resampy==0.2.2
