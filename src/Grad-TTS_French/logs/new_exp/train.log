@@ -1,4 +1,0 @@
-Epoch 1: duration loss = 0.552 | prior loss = 2.773 | diffusion loss = 0.167
-Epoch 1: duration loss = 0.556 | prior loss = 5.014 | diffusion loss = 0.198
-Epoch 2: duration loss = 0.546 | prior loss = 1.643 | diffusion loss = 0.136
-Epoch 3: duration loss = 0.548 | prior loss = 1.570 | diffusion loss = 0.135
