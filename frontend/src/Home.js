@@ -41,22 +41,19 @@ export default class Home extends Component {
       "sentence": document.getElementById('speechtextid').value
     });
 
-    var requestOptions = {
-      method: 'POST',
-      // mode: 'no-cors',
-      headers: myHeaders,
-      body: raw,
-      // redirect: 'follow'
-    };
+    // var requestOptions = {
+    //   method: 'POST',
+    //   headers: myHeaders,
+    //   body: raw,
+    // };
 
-    fetch("/synthesize", requestOptions)
-      .then(response => response.text())
+    fetch("/synthesize") // , requestOptions)
+      .then(response => response.blob())
       .then(result => {
-        console.log(result)
-        // const [playSound] = useSound(result);
-        // playSound();
-        this.setState(state => { state.apiresponse = result })
-
+        const url = URL.createObjectURL(result);
+        const audio = new Audio(url);
+        audio.play();
+        this.setState(state => { state.apiresponse = audio });
       })
       .catch(_ => console.log('error'));
   };
