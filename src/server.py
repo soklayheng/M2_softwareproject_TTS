@@ -24,7 +24,7 @@ def hello_world():
 def synthesize():
     if request.method == "POST":
         content = request.json
-        sentence = content["sentence"]
+        sentence = " ".join(content["sentence"].split("\n"))
 
         print(f"Processing: {sentence} in progress...")
         lang = classify(sentence)
@@ -33,11 +33,10 @@ def synthesize():
 
         out_path = say(sentence, lang)
 
-        return send_file(out_path, mimetype="audio/mpeg", as_attachment=True, attachment_filename="sample.mp3")
+        return send_file(out_path, mimetype="audio/mpeg", as_attachment=True, download_name=f"{lang}.mp3")
     else:
         out_path = say("Can't touch this", lang)
-        return send_file(out_path, mimetype="audio/mpeg", as_attachment=True, attachment_filename="sample.mp3")
-        # return jsonify({"speech": "Can't touch this"})
+        return send_file(out_path, mimetype="audio/mpeg", as_attachment=True, download_name="unk.mp3")
 
 
 if __name__ == "__main__":

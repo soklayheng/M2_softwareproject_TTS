@@ -1,19 +1,6 @@
 import React, { Component } from "react";
-// import useSound from "use-sound";
 
-// import { sentence } from "./data";
-
-
-// export async function fetchVoice()
-// { 
-//   console.log("calling api");
-//     return fetch("http://localhost:5000/synthesize");
-//   // return fetch("https://jsonplaceholder.typicode.com/todos/1");
-//   // return fetchVoice(sentence)
-
-// }
 export default class Home extends Component {
-
 
   constructor(props) {
     super(props)
@@ -24,13 +11,6 @@ export default class Home extends Component {
     this.listen = this.listen.bind(this)
 
   }
-  // listen = () =>{
-  //   const { TextInputValueHolder }  = this.state ;
-  //     Alert.alert(TextInputValueHolder)
-  // }
-
-
-
 
   listen = () => {
     var myHeaders = new Headers();
@@ -40,12 +20,6 @@ export default class Home extends Component {
     var raw = JSON.stringify({
       "sentence": document.getElementById('speechtextid').value
     });
-
-    // var requestOptions = {
-    //   method: 'POST',
-    //   headers: myHeaders,
-    //   body: raw,
-    // };
 
     fetch("/synthesize") // , requestOptions)
       .then(response => response.blob())
@@ -57,11 +31,6 @@ export default class Home extends Component {
       })
       .catch(_ => console.log('error'));
   };
-
-
-
-
-
 
   render() {
     return (
@@ -80,23 +49,12 @@ export default class Home extends Component {
               <div class="card-body">
                 <div>
 
-                  {/* <div class="dropdown" >
-
-                              <button class="btn btn-outline-secondary" type="button" data-toggle="dropdown">Language
-                              <span class="caret"></span></button>
-                              <ul class="dropdown-menu">
-                                 <li><a href="#">English</a></li>
-                                 <li><a href="#">French</a></li>
-                              </ul>
-                           </div> */}
-
                   <textarea id={'speechtextid'} class="story" name="story" placeholder="Type Here (Maximum 500 Characters)" rows="9" cols="78" maxLength="500">
                   </textarea>
                   <div><h1>
                     {this.state.apiresponse.speech}
                   </h1></div>
 
-                  {/* <div class="card-footer text-muted">500 characters</div> */}
                   <div class="container">
                     <button type="button" onClick={this.listen} class="btn btn-default" style={{ background: "#40E0D0" }}>Listen!</button>
                     <button type="button" class="btn btn-default" style={{ background: "#F08080" }}>Reset</button>
@@ -116,12 +74,6 @@ export default class Home extends Component {
           </div>
         </div>
       </div>
-
-
-
-
     )
   }
 }
-
-

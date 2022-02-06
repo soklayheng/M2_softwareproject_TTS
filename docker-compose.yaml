@@ -4,8 +4,6 @@ services:
   tts-api:
     build: .
     container_name: tts-api
-    expose:
-      - 8000
   tts-proxy:
     container_name: tts-proxy
     build: nginx
