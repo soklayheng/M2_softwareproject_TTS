@@ -29,9 +29,9 @@ HIFIGAN_CONFIG = os.path.abspath('./Grad-TTS/checkpts/hifigan-config.json')
 HIFIGAN_CHECKPT = os.path.abspath('./Grad-TTS/checkpts/hifigan.pt')
 GRAD_CHECKPT = os.path.abspath('./Grad-TTS/checkpts/grad-tts-old.pt')
 
-HIFIGAN_CONFIG_FR = os.path.abspath('./Grad-TTS/checkpts/hifigan-config-fr.json')
-HIFIGAN_CHECKPT_FR = os.path.abspath('./Grad-TTS/checkpts/hifigan-fr.pt')
-GRAD_CHECKPT_FR = os.path.abspath('./Grad-TTS/checkpts/grad-tts-fr.pt')
+HIFIGAN_CONFIG_FR = os.path.abspath('./Grad-TTS/checkpts/hifigan-config-fr-fr.json')
+HIFIGAN_CHECKPT_FR = os.path.abspath('./Grad-TTS/checkpts/hifigan-fr-fr.pt')
+GRAD_CHECKPT_FR = os.path.abspath('./Grad-TTS/checkpts/grad_13.pt')
 TIMESTEPS = 10
 SPEAKER = None
 
@@ -40,7 +40,7 @@ generator = GradTTS(len(symbols)+1, params.n_spks, params.spk_emb_dim, params.n_
 generator.load_state_dict(torch.load(GRAD_CHECKPT, map_location=lambda loc, storage: loc))
 _ = generator.eval()
 
-generator_fr = GradTTS(len(symbols)+1, params.n_spks, params.spk_emb_dim, params.n_enc_channels, params.filter_channels, params.filter_channels_dp, params.n_heads,
+generator_fr = GradTTS(len(symbols), params.n_spks, params.spk_emb_dim, params.n_enc_channels, params.filter_channels, params.filter_channels_dp, params.n_heads,
                     params.n_enc_layers, params.enc_kernel, params.enc_dropout, params.window_size, params.n_feats, params.dec_dim, params.beta_min, params.beta_max, params.pe_scale)
 generator_fr.load_state_dict(torch.load(GRAD_CHECKPT_FR, map_location=lambda loc, storage: loc))
 _ = generator_fr.eval()

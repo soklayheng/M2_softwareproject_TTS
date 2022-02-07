@@ -21,7 +21,13 @@ export default class Home extends Component {
       "sentence": document.getElementById('speechtextid').value
     });
 
-    fetch("/synthesize") // , requestOptions)
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+    };
+
+    fetch("/synthesize", requestOptions)
       .then(response => response.blob())
       .then(result => {
         const url = URL.createObjectURL(result);
