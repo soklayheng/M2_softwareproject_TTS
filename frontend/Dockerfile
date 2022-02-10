@@ -8,7 +8,4 @@ RUN npm install --silent
 
 COPY . .
 
-# RUN npm install -g serve
-
 CMD ["npm", "start"]
-# CMD serve -s build

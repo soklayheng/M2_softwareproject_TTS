@@ -13,13 +13,13 @@ app = Flask(__name__)
 CORS(app)
 
 
-@app.route("/api")
+@app.route("/")
 @cross_origin(origin="*", headers=["Content-Type", "Authorization"])
 def hello_world():
     return "<p>Server reachable!</p>"
 
 
-@app.route("/api/synthesize", methods=["POST"])
+@app.route("/synthesize", methods=["POST"])
 @cross_origin(origin="*", headers=["Content-Type", "Authorization"])
 def synthesize():
     if request.method == "POST":
