@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from flask import Flask, request, jsonify, send_file
+from flask import Flask, request, send_file
 from flask_cors import CORS, cross_origin
 
 from classifier import classify
@@ -13,13 +13,13 @@ app = Flask(__name__)
 CORS(app)
 
 
-@app.route("/")
+@app.route("/api")
 @cross_origin(origin="*", headers=["Content-Type", "Authorization"])
 def hello_world():
     return "<p>Server reachable!</p>"
 
 
-@app.route("/synthesize", methods=["POST"])
+@app.route("/api/synthesize", methods=["POST"])
 @cross_origin(origin="*", headers=["Content-Type", "Authorization"])
 def synthesize():
     if request.method == "POST":

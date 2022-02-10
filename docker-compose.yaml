@@ -14,10 +14,14 @@ services:
       - 80:80
     depends_on:
       - tts-api
-  tts-frontend:
+  tts-ui:
     build: frontend
     container_name: tts-ui
+    environment:
+      DANGEROUSLY_DISABLE_HOST_CHECK: "true"
     ports:
       - 3000:3000
+    depends_on:
+      - tts-proxy
     volumes:
       - ./frontend:/app

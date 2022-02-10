@@ -63,7 +63,6 @@ export default class Home extends Component {
 
                   <div class="container">
                     <button type="button" onClick={this.listen} class="btn btn-default" style={{ background: "#40E0D0" }}>Listen!</button>
-                    <button type="button" class="btn btn-default" style={{ background: "#F08080" }}>Reset</button>
                   </div>
                 </div>
               </div>
