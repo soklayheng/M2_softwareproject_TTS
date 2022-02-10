@@ -1,0 +1,13 @@
+version: "3.9"
+
+services:
+  tts-api:
+    image: amillert/tts-api:latest
+  tts-proxy:
+    image: amillert/tts-proxy:latest
+    depends_on:
+      - tts-api
+  tts-ui:
+    image: amillert/tts-ui:latest
+    ports:
+      - 80:3000
